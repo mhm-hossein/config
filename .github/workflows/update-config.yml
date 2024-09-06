@@ -1,0 +1,39 @@
+name: Update Config
+
+# تنظیم برای اجرا هر روز
+on:
+  schedule:
+    - cron: '35 * * * *'  # هر روز در نیمه شب
+
+jobs:
+  update-config:
+    runs-on: ubuntu-latest
+
+    steps:
+      # دانلود فایل‌ها از مخزن
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # نصب نسخه پایتون مورد نیاز
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install requests
+      # اجرای اسکریپت پایتون برای تغییر لینک‌ها
+      - name: Run Python script
+        run: |
+          pip install requests
+          python update_config.py  # فرض کنید اسکریپت پایتون در مخزن موجود است
+
+      # کامیت و پوش تغییرات به مخزن
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add main.json
+          git commit -m "Updated config"
+          git push origin main
