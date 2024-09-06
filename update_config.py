@@ -3,7 +3,7 @@ import requests
 # لیست فایل‌های کانفیگ (به جای لینک، محتویات آن‌ها خوانده می‌شود)
 configs = [
     "https://raw.githubusercontent.com/mhm-hossein/config/main/list1.txt",
-    "https://raw.githubusercontent.com/mhm-hossein/config/main/list1.txt",
+    "https://raw.githubusercontent.com/mhm-hossein/config/main/list2.txt",
     # ادامه فایل‌ها
 ]
 
