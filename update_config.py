@@ -1,10 +1,7 @@
-import json
-
 # لیست لینک‌های کانفیگ‌ها
 configs = [
     "https://raw.githubusercontent.com/mhm-hossein/config/main/list1",
-    "https://raw.githubusercontent.com/mhm-hossein/config/main/list2",
-    
+    "https://raw.githubusercontent.com/mhm-hossein/config/main/list1",
     # ادامه لینک‌ها
 ]
 
@@ -17,20 +14,15 @@ def get_next_config(current_config):
     except ValueError:
         return configs[0]  # اگر لینک فعلی پیدا نشد، لینک اول را برگردانید
 
-# خواندن فایل main.json
-with open('main.json', 'r') as f:
-    data = json.load(f)
-
-current_config = data['config_url']
+# خواندن فایل main.txt
+with open('main.txt', 'r') as f:
+    current_config = f.read().strip()
 
 # پیدا کردن لینک بعدی
 next_config = get_next_config(current_config)
 
-# به‌روزرسانی فایل main.json با لینک جدید
-data['config_url'] = next_config
-
-# نوشتن تغییرات در فایل main.json
-with open('main.json', 'w') as f:
-    json.dump(data, f, indent=4)
+# نوشتن لینک جدید در فایل main.txt
+with open('main.txt', 'w') as f:
+    f.write(next_config)
 
 print(f"Updated config to: {next_config}")
