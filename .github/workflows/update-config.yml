@@ -2,7 +2,7 @@ name: Update Config
 
 on:
   schedule:
-    - cron: '*/15 * * * *'  # هر روز در نیمه شب
+    - cron: '*/3 * * * *'  # هر 15 دقیقه یک بار
 
 jobs:
   update-config:
@@ -18,15 +18,21 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
+
       - name: Install dependencies
         run: |
           pip install --upgrade pip
           pip install requests
+
       # اجرای اسکریپت پایتون برای تغییر لینک‌ها
       - name: Run Python script
         run: |
-          pip install requests
           python update_config.py  # فرض کنید اسکریپت پایتون در مخزن موجود است
+
+      # کشیدن تغییرات جدید از مخزن دورافتاده
+      - name: Pull latest changes
+        run: |
+          git pull origin main || echo "No changes to pull"
 
       # کامیت و پوش تغییرات به مخزن
       - name: Commit and push changes
@@ -34,5 +40,5 @@ jobs:
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
           git add main.txt
-          git commit -m "Updated config"
+          git commit -m "Updated config" || echo "No changes to commit"
           git push origin main
