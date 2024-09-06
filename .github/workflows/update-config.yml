@@ -3,7 +3,7 @@ name: Update Config
 # تنظیم برای اجرا هر روز
 on:
   schedule:
-    - cron: '0 0 * * *'  # هر روز در نیمه شب
+    - cron: '30 * * * *'  # هر روز در نیمه شب
 
 jobs:
   update-config:
