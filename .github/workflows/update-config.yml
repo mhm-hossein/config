@@ -26,6 +26,7 @@ jobs:
       # اجرای اسکریپت پایتون برای تغییر لینک‌ها
       - name: Run Python script
         run: |
+          pip install requests
           python update_config.py  # فرض کنید اسکریپت پایتون در مخزن موجود است
 
       # کامیت و پوش تغییرات به مخزن
